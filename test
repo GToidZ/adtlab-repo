@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+
+if [ -z "$1" ] ; then
+  echo "Specify .cpp file to compile"
+  exit 1
+fi
+
+filename=$(basename -- "$1")
+ext="${filename##*.}"
+name="${filename%.*}"
+if [ "$ext" != "cpp" ] ; then
+  echo "Not a .cpp file"
+  exit 1
+fi
+
+if ! which g++ &>/dev/null ; then
+  echo "Requires g++ to be installed"
+  exit 1
+fi
+
+[ ! -d "build" ] && mkdir build
+
+g++ -o "build/$name.out" $1
+./build/$name.out
