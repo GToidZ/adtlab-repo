@@ -21,4 +21,5 @@ fi
 [ ! -d "build" ] && mkdir build
 
 g++ -o "build/$name.out" $1
-./build/$name.out
+
+[ -f "$name.in" ] && ./build/$name.out < $name.in || ./build/$name.out
